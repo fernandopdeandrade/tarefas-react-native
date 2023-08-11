@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   textH2: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginTop: 10,
+    marginTop: 40,
     marginBottom: -15,
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(0, 0, 0, 0.1)',
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     maxWidth: 360,
-    margin: '13%',
+    margin: '10%',
   },
   btnOrder: {
     padding: 10,

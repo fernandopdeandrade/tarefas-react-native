@@ -23,17 +23,17 @@ function App() {
 
   return (
     <>
-      <StatusBar style='light' backgroundColor='#3b5998' />
+      <StatusBar style='light' backgroundColor='#3b5999' />
       {loading && <Loading />}
     <NavigationContainer>
       <Stack.Navigator>
-          <Stack.Screen name="Entrar">
+          <Stack.Screen name="Entrar" options={{ headerShown: false }}>
             {props => <Login {...props} setLoading={setLoading} loading={loading} />}
           </Stack.Screen>
-          <Stack.Screen name="Visualizar" >
+          <Stack.Screen name="Visualizar" options={{ headerShown: false }}>
             {props => <Read {...props} setLoading={setLoading} loading={loading} indexData={indexData} setIndexData={setIndexData} edit={edit} setEdit={setEdit} />}
           </Stack.Screen>
-          <Stack.Screen name="Criar" >
+          <Stack.Screen name="Criar" options={{ headerShown: false }}>
             {props => <Anotation {...props} setLoading={setLoading} loading={loading} indexData={indexData} setIndexData={setIndexData} edit={edit} setEdit={setEdit} />}
           </Stack.Screen>
       </Stack.Navigator>

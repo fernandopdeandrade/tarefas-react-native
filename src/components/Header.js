@@ -6,7 +6,7 @@ import ImageHeader from './ImageHeader';
 
 const Header = (props) => {
   const { userName } = props;
-  
+
   return (
     <View style={styles.header}>
       <LinearGradient

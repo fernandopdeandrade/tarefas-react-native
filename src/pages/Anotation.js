@@ -9,7 +9,7 @@ import styles from '../styles/AnotacaoCss';
 import FormatData from '../utils/FormatData';
 import getAsyncStorage from '../utils/GetAsyncStorage';
 
-const Anotation = ({navigation, setLoading, setEdit, edit, setIndexData, indexData}) => {
+const Anotation = ({navigation, setLoading, setEdit, edit, indexData}) => {
   const [anotation, setAnotation] = useState([]);
   const [body, setBody] = useState('');
   const [title, setTitle] = useState('');
@@ -187,7 +187,7 @@ const Anotation = ({navigation, setLoading, setEdit, edit, setIndexData, indexDa
     <ScrollView>
       <Header userName={userName} />
       <View style={styles.container}>
-        <Text style={{color: '#069', fontSize: 15}}>Insira suas anotações!</Text>
+        <Text style={{color: '#069', fontSize: 15, marginTop: 20}}>Insira suas anotações!</Text>
         <TextInput
           style={styles.inputTitle}
           value={title}

@@ -1,4 +1,7 @@
+import Constants from 'expo-constants';
 import { StyleSheet } from 'react-native';
+
+console.log('Sou o HeaderCss, statusBar =', Constants.statusBarHeight);
 
 const styles = StyleSheet.create({
   container: {
@@ -11,13 +14,14 @@ const styles = StyleSheet.create({
     boxSizing: 'border-box',
   },
   header: {
-    top: 0,
+    top: Constants.statusBarHeight,
     left: 0,
     width: '100%',
     backgroundColor: '#069',
     alignItems: 'center',
     justifyContent: 'space-around',
     flexDirection: 'row',
+    marginBottom: 20,
   },
   viewLogoName: {
     width: '30%',
@@ -28,7 +32,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 5,
     marginLeft: 6,
-    marginTop: -10,
+    marginTop: -5,
   },  
   AppName: {
     color: '#fff',
