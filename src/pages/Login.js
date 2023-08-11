@@ -1,13 +1,20 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useState } from 'react';
-import { Alert, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Alert, Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import styles from '../styles/HomeCss';
 
-const Login = ({navigation}) => {
-  const [userName, setUserName] = useState('')
+const Login = ({ navigation, setLoading }) => {
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   const checkValueName = async (valueName) => {
     if (valueName.lenght === 0 || valueName === '') {
@@ -24,7 +31,8 @@ const Login = ({navigation}) => {
       )
     } else {
       await saveNameInStorage(valueName);
-      (() => navigation.navigate('Read'))();
+      setLoading(true);
+      (() => navigation.navigate('Visualizar'))();
     }
   }
 
@@ -37,7 +45,7 @@ const Login = ({navigation}) => {
   }
 
   return (
-    <>
+    <ScrollView>
     <Header userName={userName} />
     <View style={styles.viewHome}>
       <Image style={styles.imageHome} source={require('../images/img-home.jpg')} />
@@ -61,7 +69,7 @@ const Login = ({navigation}) => {
       </View>
     </View>      
     <Footer />  
-    </>
+    </ScrollView>
   );
 };
 

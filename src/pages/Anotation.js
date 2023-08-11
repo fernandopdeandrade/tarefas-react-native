@@ -2,15 +2,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
-import { Alert, Button, Pressable, Text, TextInput, View } from 'react-native';
+import { Alert, Button, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import styles from '../styles/AnotacaoCss';
 import FormatData from '../utils/FormatData';
 import getAsyncStorage from '../utils/GetAsyncStorage';
 
-const Anotation = ({navigation}) => {
-  
+const Anotation = ({navigation, setLoading, setEdit, edit, setIndexData, indexData}) => {
   const [anotation, setAnotation] = useState([]);
   const [body, setBody] = useState('');
   const [title, setTitle] = useState('');
@@ -26,6 +25,10 @@ const Anotation = ({navigation}) => {
 
   useEffect(() => {
     getStorageSave();
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000)
   }, []);
 
   const togglePicker = () => {
@@ -49,6 +52,7 @@ const Anotation = ({navigation}) => {
   const getStorageSave = async () => {
     try {
       const value = await getAsyncStorage("anotation");
+      console.log('Sou o value do getStorageSave do Anotation', value);
       const valueName = await getAsyncStorage("userName");
       setUserName(valueName);
       if (value !== null) {
@@ -111,7 +115,6 @@ const Anotation = ({navigation}) => {
       setAnotation(anotationUpdate);
       setItem("anotation", anotationUpdate);
       setEdit(false);
-      setAnotacao(true);
       setBody('');
       setTitle('');
       setDate(new Date());
@@ -162,7 +165,9 @@ const Anotation = ({navigation}) => {
       }
     ]);
 
+    setLoading(true);
     setTimeout(() => {
+      setLoading(false);
       setBody('');
       setTitle('');
       setDate(new Date());
@@ -171,14 +176,15 @@ const Anotation = ({navigation}) => {
   }
 
   const toGoBack = () => {
-    setLeitura(true);
     setLoading(true);
-    setAnotacao(false);
-    setEdit(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    navigation.navigate('Visualizar');
   }
 
   return (
-    <>
+    <ScrollView>
       <Header userName={userName} />
       <View style={styles.container}>
         <Text style={{color: '#069', fontSize: 15}}>Insira suas anotações!</Text>
@@ -252,7 +258,7 @@ const Anotation = ({navigation}) => {
         </View>
       </View>      
       <Footer />
-    </>
+    </ScrollView>
       
   )
 }

@@ -1,7 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { Image, Text, View } from 'react-native';
-import styles from '../styles/AppCss';
+import styles from '../styles/HeaderCss';
 import ImageHeader from './ImageHeader';
 
 const Header = (props) => {

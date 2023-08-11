@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     width: '100%',
-    minHeight: 150,
     backgroundColor: '#069',
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -27,9 +26,9 @@ const styles = StyleSheet.create({
   imageLogo: {
     width: 50,
     height: 50,
-    marginTop: 40,
     borderRadius: 5,
     marginLeft: 6,
+    marginTop: -10,
   },  
   AppName: {
     color: '#fff',
@@ -40,7 +39,6 @@ const styles = StyleSheet.create({
   viewImageAvatar: {
     alignItems: 'center',
     width: '70%',
-    marginTop: 45,
   },
   nameUserHeader: {
     color: '#fff',

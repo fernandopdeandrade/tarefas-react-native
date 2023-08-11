@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
-import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -9,13 +9,25 @@ import styles from '../styles/LeituraCss';
 import getAsyncStorage from '../utils/GetAsyncStorage';
 import SortTarefas from '../utils/SortTarefas';
 
-const Read = ({navigation}) => {
-
+const Read = ({ navigation, setLoading, loading, setIndexData, setEdit }) => {
   const [anotation, setAnotation] = useState([]);
   const [orderStorage, setOrderStorage] = useState(false);
   const [userName, setUserName] = useState('');
-  console.log('Sou o anotation do Leitura', anotation);
-  console.log('Sou o orderStorage do Leitura', orderStorage);
+
+  useEffect(() => {
+    (async () => {
+      const value = await getAsyncStorage("anotation");
+      const valueName = await getAsyncStorage("userName");
+      setUserName(valueName);
+      if (value !== null) {
+        setAnotation(value);
+      }
+    })();
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000)
+  }, [loading]);
 
   const order = async () => {
     try {
@@ -23,18 +35,15 @@ const Read = ({navigation}) => {
       if (orderData === null) {
         return;
       } 
-      setOrderStorage(true);
+      setOrderStorage(!orderStorage);
       setAnotation(orderData);
       await AsyncStorage.setItem("anotation", JSON.stringify(orderData));
-
     } catch (error) {
       console.log(error);
     }
   };
     
   useEffect(() => {
-    getStorageSave();
-
     if (orderStorage) {
       Alert.alert(
         'Atenção!',
@@ -56,25 +65,16 @@ const Read = ({navigation}) => {
     }
   }, [orderStorage]);
 
-  const getStorageSave = async () => {
-    try {
-      const value = await getAsyncStorage("anotation");
-      const valueName = await getAsyncStorage("userName");
-      setAnotation(...anotation, value);
-      setUserName(valueName);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const goAnotation = () => {
-    navigation.navigate('Anotation');
+    setLoading(true);
+    navigation.navigate('Criar');
   };
 
   const editIndex = (index) => {
     console.log('Sou o index do editIndex', index);
     setEdit(true);
     setIndexData(index);
+    navigation.navigate('Criar');
   };
 
   const clearAsyncStorageIndex = (index) => {
@@ -127,6 +127,9 @@ const Read = ({navigation}) => {
             setAnotation([]);
             setEdit(false);
             setLoading(true);
+            setTimeout(() => {
+              setLoading(false);
+            }, 1000)
           }
         }
       ]
@@ -134,7 +137,7 @@ const Read = ({navigation}) => {
   }
 
   return (
-    <>
+    <ScrollView>
       <Header userName={userName} />
      <View style={styles.containerLeitura}>
       <Text style={styles.textH2}>Minhas tarefas</Text>
@@ -201,7 +204,7 @@ const Read = ({navigation}) => {
         </View>
       </View>     
     <Footer />
-    </>
+    </ScrollView>
 
   )
 }
