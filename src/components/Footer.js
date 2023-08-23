@@ -1,10 +1,10 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
 import { Linking, SafeAreaView, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import styles from '../styles/FooterCss';
+import styles, { ids } from '../styles/FooterCss';
 
 const Footer = () => {
+  console.log('ids', { ids })
   const faceBookUrl = () => {
     Linking.openURL('https://www.facebook.com/pupygreen');
   };
@@ -19,10 +19,10 @@ const Footer = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, bottom: 0 }}>
-        <View style={styles.container}>
-        <LinearGradient
+      <View style={styles.container}>
+          <LinearGradient
           colors={['#4c669f', '#3b5998', '#192f6a']}
-          style={{top: 0, left: 0, right: 0, position: 'absolute', height: '100%'}}/>          
+          style={ styles.linear }/>          
           <View style={styles.iconContainer}>
             <Icon name="users" size={60} color="#900" />
           </View>

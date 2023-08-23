@@ -1,11 +1,12 @@
-import { StyleSheet } from 'react-native';
+import StyleSheet from 'react-native-media-query';
 
-const styles = StyleSheet.create({
+const { ids, styles } = StyleSheet.create({
   containerLeitura: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
+    height: '100vw'
   },
   textH2: {
     fontSize: 16,
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
   },
   infoAnotation: {
     flex: 1,
-    Width: '98%',
+    Width: '100%',
     margin: 10,
     padding: 10,
   },
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'right',
-    maxWidth: 360,
+    maxWidth: '100%',
     marginTop: -5,
     marginBottom: 20,
   },
@@ -40,17 +41,26 @@ const styles = StyleSheet.create({
   },
     imagePapel: {
     position: 'absolute',
-    width: '106.3%',
-    height: '109%',
     borderRadius: 5,
     margin: '0 auto',
+    '@media (max-width: 800px)': {
+    borderBottomWidth: 2,
+    borderBottomColor: 'green',
+    width: '103%',
+    height: '109%',
+    },
+    '@media (max-width: 500px)': {
+    borderBottomWidth: 2,
+    borderBottomColor: 'red',
+    width: '106.3%',
+    height: '109%',
+    },
   },
   viewTitle: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    maxWidth: 360,
   },
   titleP: {
     fontSize: 18,
@@ -94,7 +104,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    maxWidth: 360,
   },
   buttonEditar: {
     flex: 1,
@@ -176,3 +185,4 @@ const styles = StyleSheet.create({
 })
 
 export default styles;
+export { ids };

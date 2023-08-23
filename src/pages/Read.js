@@ -5,7 +5,7 @@ import { Alert, Image, ScrollView, Text, TouchableOpacity, View } from 'react-na
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import styles from '../styles/LeituraCss';
+import styles, { ids } from '../styles/LeituraCss';
 import getAsyncStorage from '../utils/GetAsyncStorage';
 import SortTarefas from '../utils/SortTarefas';
 
@@ -147,7 +147,7 @@ const Read = ({ navigation, setLoading, loading, setIndexData, setEdit }) => {
           (<View style={styles.infoAnotation}>{anotation.map((ele, index) => {
             return (
               <View key={index} style={styles.titleDescription}>
-                <Image style={styles.imagePapel} source={require('../images/fundo-papel.jpg')} />
+                <Image style={styles.imagePapel} source={require('../images/fundo-papel.jpg')} dataSet={{ media: ids.imagePapel }}/>
                 <View style={styles.viewCheched}>
                   {
                     !ele.check
